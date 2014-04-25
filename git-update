@@ -4,11 +4,10 @@
 #This initial version will assume that all the repositories are children 
 # of a single parent directory, and that the PWD is that directory.
 
-# get the list of subdirs. taken from ghostdog74's answer to
-# http://stackoverflow.com/questions/2107945/how-to-loop-over-directories-in-linux/2108296
-
-for dir in ~/projects/git-update/*/
+for dir in `ls`
     do
-        dir=${dir%*/}
-        echo ${dir##*/}
+        echo $dir
+        cd $dir
+        git pull
+        cd ..
 done
