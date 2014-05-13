@@ -8,7 +8,7 @@ for dir in `ls`
     do
         echo -n $dir "  "
         cd $dir
-        git fetch --all --quiet
+        git fetch -p --all --quiet
         git pull
         cd ..
 done
