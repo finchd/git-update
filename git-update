@@ -6,9 +6,12 @@
 
 for dir in `ls`
     do
-        echo -n $dir "  "
+      if [ -d $dir ] && [ -d ${dir}\/.git ] # if the object is a subdir, and a git repo
+      then
+        printf " %-20b \t " $dir # assuming < 21 wide repo names, this formats nicely
         cd $dir
         git fetch -p --all --quiet
-        git pull
+        git pull # I'd like to just output the shiny difference table, without doing the merge
         cd ..
-done
+      fi
+    done
