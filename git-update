@@ -11,7 +11,7 @@ for dir in `ls`
         printf " %-20b \t " $dir # assuming < 21 wide repo names, this formats nicely
         cd $dir
         git fetch -p --all --quiet
-        git pull # I'd like to just output the shiny difference table, without doing the merge
+        git pull --ff-only # I'd like to just output the shiny difference table, without doing the merge
         cd ..
       fi
     done
