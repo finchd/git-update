@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # A Git command for checking the status of all your repos at once.
 
-#This initial version will assume that all the repositories are children 
+#This version will assume that all the repositories are children 
 # of a single parent directory, and that the PWD is that directory.
 
 for dir in `ls`
@@ -11,7 +11,11 @@ for dir in `ls`
         printf " %-20b \t " $dir # assuming < 21 wide repo names, this formats nicely
         cd $dir
         git fetch -p --all --quiet
-        git pull --ff-only # I'd like to just output the shiny difference table, without doing the merge
+        if [ $1 = "--quiet" ]; then
+          git pull --ff-only | grep "files changed|up*to*date"
+        else
+          git pull --ff-only # I'd like to just output the shiny difference table, without doing the merge
+        fi
         cd ..
       fi
-    done
+done
